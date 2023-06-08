@@ -1,7 +1,11 @@
 import random
+import torch
 
 import pandas as pd
 import networkx as nx
+
+random.seed(1234)
+torch.manual_seed(1234)
 
 TOPOSORT = "chemical, gene, haplotype, variant disease"
 
@@ -36,7 +40,7 @@ def splits():
     G = build_graph()
     num_nodes = G.number_of_nodes()  # 6695, 13343
     nodes = G.nodes()
-    train_nodes = random.sample(nodes, int(0.6 * num_nodes))
+    train_nodes = random.sample(nodes, int(0.01 * num_nodes))
     test_nodes = nodes - set(train_nodes)
     G_train = nx.induced_subgraph(G, train_nodes).copy()
     G_test = nx.induced_subgraph(G, test_nodes).copy()
@@ -61,4 +65,5 @@ def check_dag():
     assert len(list(nx.simple_cycles(G))) == 0
 
 
-check_dag()
+if __name__ == "__main__":
+    check_dag()
