@@ -1,7 +1,11 @@
 import random
+import torch
 
 import pandas as pd
 import networkx as nx
+
+random.seed(1234)
+torch.manual_seed(1234)
 
 TOPOSORT = "chemical, gene, haplotype, variant disease"
 
@@ -61,4 +65,5 @@ def check_dag():
     assert len(list(nx.simple_cycles(G))) == 0
 
 
-check_dag()
+if __name__ == "__main__":
+    check_dag()
