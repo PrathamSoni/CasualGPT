@@ -40,7 +40,7 @@ def splits():
     G = build_graph()
     num_nodes = G.number_of_nodes()  # 6695, 13343
     nodes = G.nodes()
-    train_nodes = random.sample(nodes, int(0.6 * num_nodes))
+    train_nodes = random.sample(nodes, int(0.8 * num_nodes))
     test_nodes = nodes - set(train_nodes)
     G_train = nx.induced_subgraph(G, train_nodes).copy()
     G_test = nx.induced_subgraph(G, test_nodes).copy()
